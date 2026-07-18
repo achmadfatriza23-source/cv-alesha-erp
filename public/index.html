@@ -1,1 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV. ALESHA KARYA ABADI - ERP Dashboard</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome untuk Icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-slate-900 text-slate-100 font-sans antialiased selection:bg-teal-500 selection:text-slate-900">
+
+    <!-- 1. HALAMAN LOGIN -->
+    <div id="login-page" class="flex min-h-screen items-center justify-center px-4 py-12 sm:px-6 lg:px-8">
+        <div class="w-full max-w-md space-y-8 bg-slate-800 p-8 rounded-2xl shadow-xl border border-slate-700">
+            <div class="text-center">
+                <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-teal-500/10 text-teal-400 text-2xl">
+                    <i class="fa-solid fa-helmet-safety"></i>
+                </div>
+                <h2 class="mt-6 text-3xl font-bold tracking-tight text-white">CV. ALESHA</h2>
+                <p class="mt-2 text-sm text-slate-400">Karya Abadi — Sign in to ERP System</p>
+            </div>
+            <form class="mt-8 space-y-6" onsubmit="handleLogin(event)">
+                <div class="space-y-4 rounded-md shadow-sm">
+                    <div>
+                        <label for="username" class="sr-only">Username</label>
+                        <input id="username" name="username" type="text" required class="relative block w-full rounded-lg border-0 bg-slate-700 py-3 px-4 text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:outline-none text-sm" placeholder="Username (admin)">
+                    </div>
+                    <div>
+                        <label for="password" class="sr-only">Password</label>
+                        <input id="password" name="password" type="password" required class="relative block w-full rounded-lg border-0 bg-slate-700 py-3 px-4 text-white placeholder-slate-400 focus:ring-2 focus:ring-teal-500 focus:outline-none text-sm" placeholder="Password">
+                    </div>
+                </div>
+                <div>
+                    <button type="submit" class="group relative flex w-full justify-center rounded-lg bg-teal-500 py-3 px-4 text-sm font-semibold text-slate-900 hover:bg-teal-400 transition-colors cursor-pointer">
+                        Masuk Sistem
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. HALAMAN DASHBOARD (HIDDEN BY DEFAULT) -->
+    <div id="dashboard-page" class="hidden min-h-screen flex flex-col bg-slate-900">
+        <!-- Top Nav -->
+        <header class="bg-slate-800 border-b border-slate-700 px-4 py-4 sticky top-0 z-50">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <span class="text-teal-400 text-xl"><i class="fa-solid fa-helmet-safety"></i></span>
+                    <span class="font-bold text-lg tracking-wider">CV. ALESHA KARYA ABADI</span>
+                </div>
+                <button onclick="handleLogout()" class="text-sm bg-slate-700 hover:bg-red-500/20 hover:text-red-400 text-slate-300 px-3 py-1.5 rounded-lg transition-colors cursor-pointer">
+                    <i class="fa-solid fa-right-from-bracket mr-1"></i> Keluar
+                </button>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-4 max-w-7xl w-full mx-auto space-y-6">
+            
+            <!-- Ringkasan Keuangan Ringkas (Mobile Friendly) -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Total Kas</p>
+                    <p class="text-lg font-bold text-emerald-400 mt-1">Rp59,320,000</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Piutang Aktif</p>
+                    <p class="text-lg font-bold text-sky-400 mt-1">Rp61,900,000</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Utang (Pinjol)</p>
+                    <p class="text-lg font-bold text-rose-400 mt-1">Rp26,800,000</p>
+                </div>
+                <div class="bg-slate-800 p-4 rounded-xl border border-slate-700">
+                    <p class="text-xs text-slate-400 font-medium uppercase tracking-wider">Estimasi Profit Netto</p>
+                    <p class="text-lg font-bold text-teal-400 mt-1">Rp39,664,000</p>
+                </div>
+            </div>
+
+            <!-- Managemen Proyek Bangunan -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="font-bold text-white tracking-wide"><i class="fa-solid fa-list-check text-teal-400 mr-2"></i>Status Proyek Aktif</h3>
+                    <button class="bg-teal-500 hover:bg-teal-400 text-slate-900 text-xs font-semibold px-3 py-1.5 rounded-lg cursor-pointer">
+                        + Proyek Baru
+                    </button>
+                </div>
+                
+                <!-- List Proyek (List View biar enak di-scroll di HP) -->
+                <div class="space-y-3">
+                    <!-- Proyek 1 -->
+                    <div class="bg-slate-700/50 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                        <div>
+                            <span class="text-xs font-mono bg-teal-500/20 text-teal-300 px-2 py-0.5 rounded">H-02</span>
+                            <h4 class="font-semibold text-sm mt-1">Renovasi Ruko Cluster A</h4>
+                        </div>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full font-medium">Berjalan</span>
+                    </div>
+                    <!-- Proyek 2 -->
+                    <div class="bg-slate-700/50 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                        <div>
+                            <span class="text-xs font-mono bg-teal-500/20 text-teal-300 px-2 py-0.5 rounded">H-26</span>
+                            <h4 class="font-semibold text-sm mt-1">Pembangunan Rumah Tinggal Dua Lantai</h4>
+                        </div>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full font-medium">Berjalan</span>
+                    </div>
+                    <!-- Proyek 3 -->
+                    <div class="bg-slate-700/50 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                        <div>
+                            <span class="text-xs font-mono bg-teal-500/20 text-teal-300 px-2 py-0.5 rounded">G-38</span>
+                            <h4 class="font-semibold text-sm mt-1">Pemasangan Baja Ringan Gudang B</h4>
+                        </div>
+                        <span class="text-xs bg-amber-500/20 text-amber-400 px-2 py-1 rounded-full font-medium">Pending Material</span>
+                    </div>
+                    <!-- Proyek 4 -->
+                    <div class="bg-slate-700/50 p-3 rounded-lg flex items-center justify-between border border-slate-700">
+                        <div>
+                            <span class="text-xs font-mono bg-teal-500/20 text-teal-300 px-2 py-0.5 rounded">H-46</span>
+                            <h4 class="font-semibold text-sm mt-1">Finishing Interior Kantor Utama</h4>
+                        </div>
+                        <span class="text-xs bg-emerald-500/20 text-emerald-400 px-2 py-1 rounded-full font-medium">Berjalan</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Pengeluaran Proyek Cepat -->
+            <div class="bg-slate-800 rounded-xl border border-slate-700 p-4">
+                <h3 class="font-bold text-white tracking-wide mb-4"><i class="fa-solid fa-money-bill-transfer text-teal-400 mr-2"></i>Catat Pengeluaran Lapangan</h3>
+                <form class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs text-slate-400 font-medium mb-1">Pilih Proyek</label>
+                            <select class="w-full rounded-lg bg-slate-700 border-0 py-2.5 px-3 text-sm text-white focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                                <option>H-02 - Renovasi Ruko Cluster A</option>
+                                <option>H-26 - Rumah Tinggal Dua Lantai</option>
+                                <option>G-38 - Pemasangan Baja Ringan</option>
+                                <option>H-46 - Finishing Interior</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs text-slate-400 font-medium mb-1">Nominal (Rp)</label>
+                            <input type="number" placeholder="Contoh: 500000" class="w-full rounded-lg bg-slate-700 border-0 py-2.5 px-3 text-sm text-white focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-slate-400 font-medium mb-1">Keterangan Pengeluaran (Beli Semen, Gaji Tukang, dll)</label>
+                        <input type="text" placeholder="Masukkan detail pengeluaran..." class="w-full rounded-lg bg-slate-700 border-0 py-2.5 px-3 text-sm text-white focus:ring-2 focus:ring-teal-500 focus:outline-none">
+                    </div>
+                    <button type="button" onclick="alert('Data berhasil dicatat! (Fungsi API jalan setelah server aktif)')" class="w-full bg-slate-700 hover:bg-teal-500 hover:text-slate-900 text-teal-400 text-sm font-semibold py-2.5 rounded-lg transition-all cursor-pointer">
+                        Simpan Transaksi
+                    </button>
+                </form>
+            </div>
+        </main>
+    </div>
+
+    <!-- LOGIK SPA INTERAKSI SEDERHANA -->
+    <script>
+        function handleLogin(e) {
+            e.preventDefault();
+            // Nanti dihubungkan ke API backend Replit
+            document.getElementById('login-page').classList.add('hidden');
+            document.getElementById('dashboard-page').classList.remove('hidden');
+        }
+
+        function handleLogout() {
+            document.getElementById('dashboard-page').classList.add('hidden');
+            document.getElementById('login-page').classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
 
